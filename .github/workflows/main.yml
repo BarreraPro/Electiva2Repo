@@ -1,4 +1,4 @@
-name: Deploy a Surge.sh
+name: Deploy to Surge
 
 on:
   push:
@@ -10,18 +10,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18"
-
-      - name: Install Surge
-        run: npm install --global surge
-
-      - name: Deploy to Surge
+      - name: Install Surge and Deploy
         env:
-          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-        run: surge ./ https://electiva2repo-barrera.surge.sh --token $SURGE_TOKEN
+          SURGE_TOKEN: ${{ secrets.SURGE_API_KEY }}
+        run: |
+          npm install --global surge
+          echo $SURGE_TOKEN | surge login --token
+          surge --project ./ --domain dbarrera-electiva2.surge.sh
