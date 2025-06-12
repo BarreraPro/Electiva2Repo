@@ -11,4 +11,4 @@ jobs:
     steps:
       - name: Enviar notificación a ntfy.sh
         run: |
-          curl -d "Nuevo push a la rama main del repositorio." ntfy.sh/devops-itla
+          curl -d "🚀 Push realizado por BarreraPro a la rama main del repositorio Electiva2Repo" ntfy.sh/devops-itla
